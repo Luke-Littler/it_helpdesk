@@ -1,0 +1,13 @@
+<turbo-frame id="view_notes">
+  <h3 class="text-base font-semibold leading-7 text-gray-900 inline">Notes</h3>
+  <div class="float-end mr-20 inline">
+    <%= link_to "Back", problem_path, class: "text-sm text-blue-500" %>
+  </div>
+  <hr class="mr-20 border-black" />
+  <div id="tabs-1-panel-2" class="-m-0.5 rounded-lg p-0.5 pb-0" aria-labelledby="tabs-1-tab-2" role="tabpanel" tabindex="0">
+    <div class="border-b pt-4">
+        <%= render "form", poly_note: @poly_note  %>
+        <%= render poly_notes %>
+    </div>
+  </div>
+</turbo-frame>

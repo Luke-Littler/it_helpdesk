@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: equipment
+#
+#  id            :bigint           not null, primary key
+#  serial_number :string
+#  make          :string
+#  model         :string
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
+one:
+  serial_number: MyString
+  make: MyString
+  model: MyString
+
+two:
+  serial_number: MyString
+  make: MyString
+  model: MyString

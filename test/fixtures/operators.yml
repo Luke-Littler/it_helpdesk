@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: operators
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  phone      :string
+#  email      :string
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+one:
+  name: MyString
+
+two:
+  name: MyString

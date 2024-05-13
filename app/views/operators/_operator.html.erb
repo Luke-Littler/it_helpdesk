@@ -1,0 +1,12 @@
+<tbody class="divide-y divide-gray-200">
+  <tr>
+    <td class="whitespace-nowrap underline py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= link_to operator.name, operator %></td>
+    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= operator.phone %></td>
+    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= operator.email %></td>
+    <% if current_account.admin? %>
+    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+      <%= link_to "Edit", edit_operator_path(operator), class:"text-indigo-600 hover:text-indigo-900" %><span class="sr-only"><%= operator.name%></span>
+    </td>
+    <% end %>
+  </tr>
+</tbody>

@@ -1,0 +1,12 @@
+<% flash.each do |key, message| %>
+<div data-controller="flash-message" class="absolute pt-16 inset-0 p-6 items-start justify-end">
+  <div class="flex flex-col items-center justify-center">
+    <div class="relative flex px-4 py-3 space-x-2 border <%= flash_class(key) %>" role="alert">
+      <strong class="font-bold"><%= message %></strong>
+      <span class="pl-5">
+        <%= heroicon "x-mark", options: { "data-action": "click->flash-message#close", class: "w-6 h-6 fill-current", role: "button" } %>
+      </span>
+    </div>
+  </div>
+</div>
+<% end %>

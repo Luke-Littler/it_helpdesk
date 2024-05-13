@@ -1,0 +1,195 @@
+<div  class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900 mt-2">Problem #<%= @problem.id %>
+        <span data-controller="problem-status-colour" data-problem-status-colour-target="status" class="ml-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium capitalize ring-1 ring-inset <%= @problem.status %>">
+          <%= @problem.status.gsub("_", " ") %>
+        </span>
+      </h1>
+      <% if @problem.poly_notes.first.present? %>
+        <p class="mt-2 text-sm text-gray-700"><%= first_problem_note %></p>
+      <% end %>
+      <p class="mt-2 text-sm text-gray-700">Problem Created: <%= @problem.created_at %></p>
+      <% if @problem.resolved? %>
+      <p class="mt-2 text-sm text-gray-700">Problem Resolved: <%= @problem.updated_at %></p>
+      <p class="mt-2 text-sm text-gray-700">Time to Resolved: <%= time_difference %></p>
+      <% end %>
+    </div>
+    <% if !@problem.resolved? %>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= button_to "Resolve Problem", resolve_problem_path(@problem), class: "block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="table min-w-full">
+        <div class="table-header-group">
+          <div class="table-row">
+            <div scope="col" class="table-cell border-b border-gray-300 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Problem ID</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Operator</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Problem Type</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Problem Sub-type</div>
+          </div>
+        </div>
+        <%= render @problem %>  
+        </div>
+      </div>
+    </div>
+
+
+ <div class="grid grid-cols-2 mt-4">
+  <div>
+  <div class="px-4 sm:px-0">
+    <h3 class="text-base font-semibold leading-7 text-gray-900">Problem Information</h3>
+    <hr class="mr-20 border-black" />
+    <% if @problem.poly_notes.first.present? %>
+      <p class="mt-2 text-sm text-gray-700"><%= first_problem_note %></p>
+    <% end %>
+  </div>
+  <div class="mt-2 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Problem Type</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize"><%= @problem.problem_type %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Problem Sub-type</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize"><%= @problem.problem_sub_type %></dd>
+      </div>
+
+
+      <h3 class="text-base font-semibold leading-7 text-gray-900 pt-4">Operator Information</h3>
+      <div>
+      <hr class="mr-20 border-black" />
+      </div>
+      <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Name</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 underline"><%= link_to @problem.operator.name , operator_path(@problem.operator) %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Telephone</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.operator.phone %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Email</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.operator.email %></dd>
+      </div>
+
+
+      <h3 class="text-base font-semibold leading-7 text-gray-900 pt-4">User Information</h3>
+      <div>
+        <hr class="mr-20 border-black" />
+      </div>
+      <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Name</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 underline"><%= link_to @problem.user.name , user_path(@problem.user) %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Telephone</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.user.phone %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Email</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.user.email %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Job Title</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.user.job_title %></dd>
+      </div>
+      <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Department</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.user.department %></dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+
+<%= turbo_frame_tag "view_notes" do %>
+
+<div class="px-4 sm:px-0">
+  <h3 class="text-base font-semibold leading-7 text-gray-900">Equipment Information</h3>
+  <hr class="mr-20 border-black" />
+  <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Make</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 underline"><%= link_to @problem.equipment.make, equipment_path(@problem.equipment), data: { turbo: "false"} %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Model</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.equipment.model %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Operating System</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.equipment.operating_system %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Serial Number</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 underline"><%= link_to @problem.equipment.serial_number, equipment_path(@problem.equipment), data: { turbo: "false"} %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Expired Software Licences</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @problem.equipment.software_products.where(status: :expired).count  %></dd>
+  </div>
+
+
+  <h3 class="text-base font-semibold leading-7 text-gray-900 pt-2">Notes</h3>
+  <hr class="mr-20 border-black" />
+  <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <a href="<%= poly_note_path(@problem, :notable_id => @problem.id, :notable_type => "Problem") %>" class="block rounded-md bg-amber-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">View Notes</a>
+  </div>
+  
+
+  <% if @problem.unresolved?  %>
+  <h3 class="text-base font-semibold leading-7 text-gray-900 pt-4">Available Specialist</h3>
+  <hr class="mr-20 border-black" />
+  <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900"> Name</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 underline"><%= link_to available_specialist.name, specialist_path(available_specialist), data: { turbo: "false" } %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Telephone</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= available_specialist.phone %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Email</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= available_specialist.email %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Specialist Type</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize"><%= available_specialist.specialist_type %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Specialist Sub-type</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize"><%= available_specialist.specialist_sub_type %></dd>
+  </div>
+  <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <%= button_to "Assign Specialist", assign_specialist_path(@problem, params: { specialist_id: available_specialist.id }), data: { turbo: "false" }, class: "block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  </div>
+  <% else %>
+    <h3 class="text-base font-semibold leading-7 text-gray-900 pt-4">Assigned Specialist</h3>
+  <hr class="mr-20 border-black" />
+  <div class="px-4 pt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900"> Name</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 underline"><%= link_to @specialist.name, specialist_path(@specialist), data: { turbo: "false" } %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Telephone</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @specialist.phone %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Email</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @specialist.email %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Specialist Type</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize"><%= @specialist.specialist_type %></dd>
+  </div>
+  <div class="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <dt class="text-sm font-medium leading-6 text-gray-900">Specialist Sub-type</dt>
+    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize"><%= @specialist.specialist_sub_type %></dd>
+  </div>
+  <% end %>
+  <% end %>

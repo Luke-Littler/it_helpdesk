@@ -1,0 +1,35 @@
+<%= form_with(model: equipment) do |f| %>
+  <% if equipment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
+
+      <ul>
+        <% equipment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="my-4">
+      <%= f.label :serial_number, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.text_field :serial_number, autofocus: true, class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+     <div>
+      <%= f.label :make, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.text_field :make, class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div>
+      <%= f.label :model, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.text_field :model, class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="md:flex md:items-center">
+      <div class="md:w-2/3">
+        <%= f.submit "Submit", class:"shadow bg-gray-900 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+
+

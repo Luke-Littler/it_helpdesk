@@ -1,0 +1,46 @@
+<%= form_with(model: problem) do |f| %>
+  <% if problem.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+
+      <ul>
+        <% problem.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <% if current_account.operator? %>
+        <%= f.hidden_field :operator_id, value: current_account.operator.id %>
+      <% elsif current_account.specialist? %>
+        <%= f.hidden_field :specialist_id, value: current_account.specialist.id %>
+      <% end %>
+    <div>
+
+    <div class="my-4">
+      <%= f.label :user, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.collection_select :user_id, @users.order(:name), :id, :name, include_blank: true, class:"w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="my-4">
+      <%= f.label :equipment, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.collection_select :equipment_id, Equipment.order(:serial_number), :id, :serial_number, include_blank: true, class:"w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="my-4">
+      <%= f.label :problem_type, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.select :problem_type, Problem.problem_types.keys, class:"w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="my-4">
+      <%= f.label :problem_sub_type, class:"block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.select :problem_sub_type, Problem.problem_sub_types.keys, class:"w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="md:flex md:items-center">
+      <div class="md:w-2/3">
+        <%= f.submit "Submit", class:"shadow bg-gray-900 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+
+

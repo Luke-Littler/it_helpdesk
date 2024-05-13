@@ -1,0 +1,33 @@
+<div id="problems">
+<div class="mt-8 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="table min-w-full">
+        <div class="table-header-group">
+          <div class="table-row">
+            <div scope="col" class="table-cell border-b border-gray-300 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Problem ID</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Operator</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Problem Type</div>
+            <div scope="col" class="table-cell border-b border-gray-300 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Problem Sub-type</div>
+            <% if !current_account.user? %>
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                <span class="sr-only">Edit</span>
+              </th>
+            <% end %>
+          </div>
+        </div>
+        <% if @problems.present? %>
+        <% @problems.each do |problem| %>
+          <%= render problem %>
+        <% end %>
+        <% end %>
+        <% if @problem.present? %>
+          <%= render @problem %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: software_products
+#
+#  id               :bigint           not null, primary key
+#  name             :string
+#  status           :string
+#  licence_number   :string
+#  licence_exp_date :datetime
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+one:
+  status: MyString
+  licence_exp_date: MyString
+  name: MyString
+  licence_number: MyString
+
+two:
+  status: MyString
+  licence_exp_date: MyString
+  name: MyString
+  licence_number: MyString

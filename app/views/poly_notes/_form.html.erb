@@ -1,0 +1,31 @@
+<%= form_with url: poly_notes_path, method: :post do |form| %>
+  <% if poly_note.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(poly_note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+        <% poly_note.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="px-3 p-1 pt-4 mr-20 bg-amber-50 text-sm leading-5 text-gray-800 rounded">
+    <div class="text-xs pt-6 text-slate-500">
+      <div class="flex items-center border-b border-pink-300 py-2">
+        <input type="hidden" name="poly_note[notable_type]" value="<%= params[:notable_type] %>">
+        <input type="hidden" name="poly_note[notable_id]" value="<%= params[:notable_id] %>">
+        <% if current_account.user? %>
+          <input type="hidden" name="poly_note[user_id]" value="<%= current_account.user.id %>">
+        <% elsif current_account.specialist? %>
+          <input type="hidden" name="poly_note[specialist_id]" value="<%= current_account.specialist.id %>">
+        <% elsif current_account.operator? %>
+          <input type="hidden" name="poly_note[operator_id]" value="<%= current_account.operator.id %>">
+        <% end %>
+        <input name="poly_note[note]" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Type your comment here" aria-label="Full name">
+        <input type="submit" method="POST" data-turbo="false" class="flex-shrink-0 bg-pink-300 hover:bg-pink-500 border-pink-300  text-sm text-white py-1 px-2 rounded">
+      </div>
+    </div>
+  </div>
+<% end %>

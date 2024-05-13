@@ -1,0 +1,5 @@
+<%= form_with(url: equipment_software_product_path, method: :post) do |f| %>
+    <%f.hidden_field :equipment_id, value: @equipment.id %>
+    <%= f.select :software_product_id, SoftwareProduct.all.collect { |sp| [sp.name, sp.id] }, { include_blank: true }, class:"mt-8 border border-black" %>
+    <%= f.submit 'Add Software Product', class:"mt-8 shadow bg-gray-900 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" %>
+<% end %>
