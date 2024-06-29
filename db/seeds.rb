@@ -35,7 +35,7 @@ Specialist.create!(
     end
     puts "Operators Created"
 
-1000.times do |i|
+100.times do |i|
     Problem.create!(
         problem_type: problem_types.sample,
         problem_sub_type: problem_sub_types.sample,
@@ -45,7 +45,7 @@ Specialist.create!(
     puts "Problems Created"
 
 # Create equipment
-200.times do |i|
+100.times do |i|
     Equipment.create!(
         serial_number: Faker::DrivingLicence.british_driving_licence,
         make: Faker::Device.manufacturer,
@@ -79,7 +79,7 @@ status = [0, 1]
     puts "Specialists Created"
 
 # Create users
-1000.times do |i|
+100.times do |i|
     User.create!(
         name: Faker::Name.name,
         phone: Faker::PhoneNumber.cell_phone,
@@ -91,7 +91,7 @@ status = [0, 1]
     puts "Users Created"
 
     # Create notes
-1000.times do |i|
+100.times do |i|
     PolyNote.create!(
         note: Faker::Lorem.sentence,
         notable_type: "Problem",
@@ -139,7 +139,7 @@ status = [0, 1]
     puts "Equipment_id added to problems"
 
     # Add equipment_id and software_product_id to equipment_software_products
-   1000.times do |i|
+   100.times do |i|
     EquipmentSoftwareProduct.create!(
         equipment_id: Equipment.all.sample.id,
         software_product_id: SoftwareProduct.all.sample.id,
@@ -149,7 +149,7 @@ status = [0, 1]
 
     # Add problem_id and specialist_id to problems_specialists
     n = 1
-    1000.times do |i|
+    100.times do |i|
     ProblemsSpecialists.create!(
         problem_id: n,
         specialist_id: 1,
